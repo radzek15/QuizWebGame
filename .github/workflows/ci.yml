@@ -21,7 +21,7 @@ jobs:
       - name: Set Poetry environment
         run: |
           poetry env use ${{ env.PYTHON_VERSION }}
-          - name: Install dependencies
-            run: |
-              poetry lock --no-update
-              poetry install --no-root
+      - name: Install dependencies
+        run: |
+          poetry lock --no-update
+          poetry install --no-root
