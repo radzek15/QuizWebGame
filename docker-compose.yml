@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/local/django/Dockerfile
+    volumes:
+      - .:/app:z
+      - static_volume:/app/staticfiles
+      - media_volume:/app/mediafiles
+    expose:
+      - "8000"
+    env_file:
+      - .envs/.local/.django
+      - .envs/.local/.postgres
+    depends_on:
+      - postgres
+    command: /start.sh
+    networks:
+      - quiz_net
+
+  postgres:
+    image: "postgres:16-bullseye"
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./.envs/.local/.postgres
+    networks:
+      - quiz_net
+
+  nginx:
+      restart: always
+      depends_on:
+          - api
+      volumes:
+          - static_volume:/app/staticfiles
+          - media_volume:/app/mediafiles
+      build:
+          context: ./docker/local/nginx
+          dockerfile: Dockerfile
+      ports:
+          - "8080:80"
+      networks:
+          - quiz_net
+
+volumes:
+  local_postgres_data: {}
+  static_volume:
+  media_volume:
+
+networks:
+  quiz_net:
+    driver: bridge

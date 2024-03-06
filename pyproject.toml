@@ -1,0 +1,50 @@
+[tool.poetry]
+name = "quizwebgame"
+version = "0.1.0"
+description = ""
+authors = ["radzek15 <radzek15@wp.pl>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.0.3"
+django-environ = "^0.11.2"
+psycopg2-binary = "^2.9.9"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.3.0"
+pytest = "^8.0.2"
+isort = "^5.13.2"
+pyupgrade = "^3.15.1"
+pre-commit = "^3.6.2"
+djlint = "^1.34.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
+ignore = [
+    "E712",  # Allow using if x == False, as it's not always equivalent to if x.
+    "E501",  # Supress line-too-long warnings: trust black's judgement on this one.
+    "A003",  # Allow shawoding class attribute: django uses id.
+    "B904",  # Allow unchained exceptions: it's fine to raise 404 in django.
+    "F401",  # Unused import
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["E402"]
+
+[tool.isort]
+profile = "django"
+combine_as_imports = true
+include_trailing_comma = true
+line_length = 120
+multi_line_output = 3
+
+[tool.djlint]
+profile="django"
+ignore = "H031"
