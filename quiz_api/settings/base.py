@@ -8,8 +8,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 APP_DIR = BASE_DIR / "core_apps"
 
-SECRET_KEY = 'django-insecure-elq-ceo)b*!1gdk)+rgq=*c2ga(a)a*im@up+l40j4uh$4pcry'
-
 DEBUG = env.bool("DJANGO_DEBUG", False)
 
 ALLOWED_HOSTS = ['*']
@@ -24,17 +22,20 @@ DJANGO_APPS = [
 ]
 
 IMPORTED_APPS = [
-
+    'rest_framework',
+    'django_filters',
+    'corsheaders',
 ]
 
 LOCAL_APPS = [
-
+    'core_apps.questions',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + IMPORTED_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -65,9 +66,13 @@ WSGI_APPLICATION = 'quiz_api.wsgi.application'
 
 DATABASES = {'default': env.db('DATABASE_URL')}
 
-
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
+]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -86,8 +91,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -98,6 +101,10 @@ USE_TZ = True
 
 SITE_ID = 1
 
+ADMIN_URL = 'admin/'
+
+CORS_URLS_REGEX = r'^.*$'
+
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = str(BASE_DIR / 'staticfiles')
 
@@ -105,3 +112,46 @@ MEDIA_URL = '/mediafiles/'
 MEDIA_ROOT = str(BASE_DIR / 'mediafiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+    ],
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ]
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {name} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+    "filters": {
+        "require_debug_true": {
+            "()": "django.utils.log.RequireDebugTrue",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "filters": ["require_debug_true"],
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "propagate": True,
+        },
+    },
+}

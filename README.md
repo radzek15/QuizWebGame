@@ -3,6 +3,10 @@
   <h1 align="center">Quiz Web Game</h1>
   <p align="justify">Quiz Web Game is an interactive and engaging online game that tests your knowledge on a variety of topics with multiple-choice questions. It is a fun and entertaining way to expand your knowledge and test your skills, with instant feedback on each question.</p></div>
 
+## Progress
+   * [x] Setup done
+   * [x] Questions models done
+   * [ ] Next Steps - Vue Frontend, User Creation + Verification, Quiz Model, Quiz+Answers Levels/Category
 
 ## Tech Stack
    * Python3
