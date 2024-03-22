@@ -30,6 +30,17 @@ services:
     networks:
       - quiz_net
 
+  client:
+    build:
+      context: .
+      dockerfile: ./docker/local/vue/Dockerfile
+    restart: on-failure
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    networks:
+      - quiz_net
+
   nginx:
       restart: always
       depends_on:
