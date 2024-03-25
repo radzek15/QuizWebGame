@@ -194,10 +194,10 @@ cython_debug/
 
 # VUE
 # dependencies
-client/node_modules
-client/.pnp
-client/.pnp.js
-client/dist
+**/node_modules
+**/.pnp
+**/.pnp.js
+**/dist
 
 # testing
 client/coverage
