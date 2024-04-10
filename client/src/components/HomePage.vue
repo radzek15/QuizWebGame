@@ -1,13 +1,13 @@
 <template>
-  <DemoPlay />
+  <HomeButtons />
 </template>
 
 <script>
-import DemoPlay from "@/components/Quiz/DemoPlay.vue";
+import HomeButtons from "@/components/Quiz/HomeButtons.vue";
 
 export default {
   name: 'HomePage',
-  components: {DemoPlay},
+  components: {HomeButtons},
 };
 </script>
 

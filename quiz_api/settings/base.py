@@ -29,6 +29,7 @@ IMPORTED_APPS = [
 
 LOCAL_APPS = [
     'core_apps.questions',
+    'core_apps.quizzes',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + IMPORTED_APPS + LOCAL_APPS
