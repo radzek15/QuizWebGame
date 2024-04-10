@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <h1>Demo Quiz</h1>
-    <div v-for="q in questions" :key="q.id">
-      <label class="mt-4">{{q.id}}. {{q.question_description}}</label>
-      <div v-for="(choice, index) in q.choices" :key="index" v-if="choice !== null">
+    <div v-for="(q, index) in questions" :key="q.id">
+      <label class="mt-4">{{index + 1}}. {{q.question_description}}</label>
+      <div v-for="(choice, index) in q.choices" :key="index">
         <input
           type="radio"
           :name="'question_' + q.id"
@@ -33,11 +33,11 @@ export default {
     axios.get('http://localhost:8080/api/question/')
       .then(response => {
         if (response.data.results && response.data.results.length > 0) {
-          this.questions = response.data.results.map(question => ({
-            ...question,
+          this.questions = response.data.results.map(q => ({
+            ...q,
             selectedChoice: null,
-            choices: this.shuffleChoices([question.correct_answer, question.wrong_answer1, question.wrong_answer2, question.wrong_answer3].filter(Boolean)), // Filter out null values
-            numOptions: this.getNumOptions(question)
+            choices: this.shuffleChoices([q.correct_answer, q.wrong_answer1, q.wrong_answer2, q.wrong_answer3].filter(c => c !== null && c !== "")),
+            numOptions: this.getNumOptions(q)
           }));
         }
       })

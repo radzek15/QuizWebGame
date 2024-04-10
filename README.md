@@ -6,7 +6,8 @@
 ## Progress
    * [x] Setup done
    * [x] Questions models done
-   * [ ] Next Steps - Vue Frontend, User Creation + Verification, Quiz Model, Quiz+Answers Levels/Category
+   * [x] Quiz Model
+   * [ ] Next Steps - Vue Frontend, User Creation + Verification, Quiz+Answers Levels/Category
 
 ## Tech Stack
    * Python3
@@ -22,4 +23,4 @@
    * Makefile
 
 ## License
-CodeGen is licensed under the [MIT](https://github.com/radzek15/QuizWebGame/blob/master/LICENSE). Feel free to use, modify, and distribute the code as per the terms of the license.
+QuizWebGame is licensed under the [MIT](https://github.com/radzek15/QuizWebGame/blob/master/LICENSE). Feel free to use, modify, and distribute the code as per the terms of the license.
