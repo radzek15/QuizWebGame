@@ -1,23 +1,28 @@
 <template>
-  <div>
-    <h2>Create New Question</h2>
-    <form @submit.prevent="createQuestion">
-      <label for="questionDescription">Question Description:</label>
-      <input type="text" id="questionDescription" v-model="questionDescription" required>
+  <div class="container">
+    <h2>Create New Quiz</h2>
+    <form @submit.prevent="createQuiz">
+      <label for="quizName">Quiz Name:</label>
+      <input type="text" id="quizName" v-model="quizName" required>
 
-      <label for="correctAnswer">Correct Answer:</label>
-      <input type="text" id="correctAnswer" v-model="correctAnswer" required>
+      <label for="quizDescription">Quiz Description:</label>
+      <input type="text" id="quizDescription" v-model="quizDescription" required>
 
-      <label for="wrongAnswer1">Wrong Answer 1:</label>
-      <input type="text" id="wrongAnswer1" v-model="wrongAnswer1" required>
+      <label for="availableQuestions">Available Questions:</label>
+      <select id="availableQuestions" v-model="selectedQuestions" multiple>
+        <option v-for="question in availableQuestions" :key="question.id" :value="question.id">
+          {{ question.question_description }}
+        </option>
+      </select>
 
-      <label for="wrongAnswer2">Wrong Answer 2:</label>
-      <input type="text" id="wrongAnswer2" v-model="wrongAnswer2">
+      <label for="selectedQuestions">Selected Questions:</label>
+      <ul>
+        <li v-for="questionId in selectedQuestions" :key="questionId">
+          {{ getQuestionById(questionId).question_description }}
+        </li>
+      </ul>
 
-      <label for="wrongAnswer3">Wrong Answer 3:</label>
-      <input type="text" id="wrongAnswer3" v-model="wrongAnswer3">
-
-      <button type="submit">Create Question</button>
+      <button type="submit">Create Quiz</button>
     </form>
   </div>
 </template>
@@ -26,33 +31,59 @@
 import axios from 'axios';
 
 export default {
-  name: 'CreateQuestion',
+  name: 'CreateQuiz',
   data() {
     return {
-      questionDescription: '',
-      correctAnswer: '',
-      wrongAnswer1: '',
-      wrongAnswer2: '',
-      wrongAnswer3: ''
+      quizName: '',
+      quizDescription: '',
+      selectedQuestions: [],
+      availableQuestions: [],
+      csrfToken: ''
     };
   },
+  created() {
+    this.fetchCSRFToken();
+    this.fetchAvailableQuestions();
+  },
   methods: {
-    createQuestion() {
-      const questionData = {
-        question_description: this.questionDescription,
-        correct_answer: this.correctAnswer,
-        wrong_answer1: this.wrongAnswer1,
-        wrong_answer2: this.wrongAnswer2,
-        wrong_answer3: this.wrongAnswer3
-      };
-
-      axios.post('http://localhost:8080/api/question/', questionData)
+    fetchCSRFToken() {
+      this.csrfToken = this.getCookie('csrftoken');
+    },
+    getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    },
+    fetchAvailableQuestions() {
+      axios.get('http://localhost:8080/api/question/')
         .then(response => {
-          console.log('Question created:', response.data);
+          this.availableQuestions = response.data.results;
         })
         .catch(error => {
-          console.error('Error creating question:', error);
+          console.error('Error fetching available questions:', error);
         });
+    },
+    getQuestionById(questionId) {
+      return this.availableQuestions.find(question => question.id === questionId);
+    },
+    createQuiz() {
+      const quizData = {
+        quiz_name: this.quizName,
+        quiz_description: this.quizDescription,
+        questions: this.selectedQuestions
+      };
+
+      axios.post('http://localhost:8080/api/quiz/', quizData, {
+        headers: {
+          'X-CSRFToken': this.csrfToken
+        }
+      })
+      .then(response => {
+        console.log('Quiz created:', response.data);
+      })
+      .catch(error => {
+        console.error('Error creating quiz:', error);
+      });
     }
   }
 };

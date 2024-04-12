@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import HomeButtons from "@/components/Quiz/HomeButtons.vue";
+import HomeButtons from "@/components/HomeButtons.vue";
 
 export default {
   name: 'HomePage',
