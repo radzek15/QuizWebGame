@@ -9,8 +9,10 @@ export default {
 </script>
 
 <template>
-  <CreateQuestion />
-  <CreateQuiz />
+  <div class="container">
+    <CreateQuestion />
+    <CreateQuiz />
+  </div>
 </template>
 
 <style scoped>

@@ -1,21 +1,41 @@
 <template>
-  <div class="container">
+  <div class="row my-5">
     <h2>Create New Question</h2>
-    <form @submit.prevent="createQuestion">
-      <label for="questionDescription">Question Description:</label>
-      <input type="text" id="questionDescription" v-model="questionDescription" required>
+    <form @submit.prevent="createQuestion" class="form-row">
+      <div class="col col-lg-2">
+        <div class="form-group">
+          <label for="questionDescription">Question Description:</label>
+          <input type="text" id="questionDescription" v-model="questionDescription" required>
+        </div>
+      </div>
 
-      <label for="correctAnswer">Correct Answer:</label>
-      <input type="text" id="correctAnswer" v-model="correctAnswer" required>
+      <div class="col col-lg-2">
+        <div class="form-group">
+          <label for="correctAnswer">Correct Answer:</label>
+          <input type="text" id="correctAnswer" v-model="correctAnswer" required>
+        </div>
+      </div>
 
-      <label for="wrongAnswer1">Wrong Answer 1:</label>
-      <input type="text" id="wrongAnswer1" v-model="wrongAnswer1" required>
+      <div class="col col-lg-2">
+        <div class="form-group">
+          <label for="wrongAnswer1">Wrong Answer 1:</label>
+          <input type="text" id="wrongAnswer1" v-model="wrongAnswer1" required>
+        </div>
+      </div>
 
-      <label for="wrongAnswer2">Wrong Answer 2:</label>
-      <input type="text" id="wrongAnswer2" v-model="wrongAnswer2">
+      <div class="col col-lg-2">
+        <div class="form-group">
+          <label for="wrongAnswer2">Wrong Answer 2:</label>
+          <input type="text" id="wrongAnswer2" v-model="wrongAnswer2">
+        </div>
+      </div>
 
-      <label for="wrongAnswer3">Wrong Answer 3:</label>
-      <input type="text" id="wrongAnswer3" v-model="wrongAnswer3">
+      <div class="col col-lg-2">
+        <div class="form-group">
+          <label for="wrongAnswer3">Wrong Answer 3:</label>
+          <input type="text" id="wrongAnswer3" v-model="wrongAnswer3">
+        </div>
+      </div>
 
       <button type="submit">Create Question</button>
     </form>
@@ -75,5 +95,13 @@ export default {
 </script>
 
 <style scoped>
-
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .col {
+    flex: 1;
+    padding: 0 10px;
+    max-width: 100%;
+  }
 </style>

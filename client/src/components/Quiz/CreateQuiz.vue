@@ -1,26 +1,39 @@
 <template>
-  <div class="container">
+  <div class="row my-5">
     <h2>Create New Quiz</h2>
     <form @submit.prevent="createQuiz">
-      <label for="quizName">Quiz Name:</label>
-      <input type="text" id="quizName" v-model="quizName" required>
 
-      <label for="quizDescription">Quiz Description:</label>
-      <input type="text" id="quizDescription" v-model="quizDescription" required>
+      <div class="form-row">
+        <div class="col col-lg-2">
+          <label for="quizName">Quiz Name:</label>
+          <input type="text" id="quizName" v-model="quizName" required>
+        </div>
 
-      <label for="availableQuestions">Available Questions:</label>
-      <select id="availableQuestions" v-model="selectedQuestions" multiple>
-        <option v-for="question in availableQuestions" :key="question.id" :value="question.id">
+        <div class="col col-lg-2">
+          <label for="quizDescription">Quiz Description:</label>
+          <input type="text" id="quizDescription" v-model="quizDescription" required>
+        </div>
+      </div>
+
+
+      <div class="col-lg-2 my-4">
+        <label for="availableQuestions">Available Questions:</label>
+        <select id="availableQuestions" v-model="selectedQuestions" multiple>
+          <option v-for="question in availableQuestions" :key="question.id" :value="question.id">
           {{ question.question_description }}
         </option>
-      </select>
+        </select>
+      </div>
 
-      <label for="selectedQuestions">Selected Questions:</label>
-      <ul>
-        <li v-for="questionId in selectedQuestions" :key="questionId">
-          {{ getQuestionById(questionId).question_description }}
-        </li>
-      </ul>
+
+      <div>
+        <label for="selectedQuestions">Selected Questions:</label>
+        <ul>
+          <li v-for="questionId in selectedQuestions" :key="questionId">
+            {{ getQuestionById(questionId).question_description }}
+          </li>
+        </ul>
+      </div>
 
       <button type="submit">Create Quiz</button>
     </form>
@@ -90,5 +103,13 @@ export default {
 </script>
 
 <style scoped>
+  .form-row {
 
+
+  }
+  .col {
+    flex: 1;
+    padding: 0 10px;
+    max-width: 100%;
+  }
 </style>
