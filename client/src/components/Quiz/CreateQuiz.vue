@@ -15,24 +15,28 @@
         </div>
       </div>
 
+      <div class="form-row">
+        <div class="col col-lg-1 my-4">
+          <label for="availableQuestions">Available Questions:</label>
+          <select id="availableQuestions" v-model="selectedQuestion" multiple>
+            <option v-for="question in availableQuestions" :key="question.id" :value="question.id">
+            {{ question.question_description }}
+            </option>
+          </select>
+          <button type="button" @click="addSelectedQuestion">Add</button>
+        </div>
 
-      <div class="col-lg-2 my-4">
-        <label for="availableQuestions">Available Questions:</label>
-        <select id="availableQuestions" v-model="selectedQuestions" multiple>
-          <option v-for="question in availableQuestions" :key="question.id" :value="question.id">
-          {{ question.question_description }}
-        </option>
-        </select>
-      </div>
-
-
-      <div>
-        <label for="selectedQuestions">Selected Questions:</label>
-        <ul>
-          <li v-for="questionId in selectedQuestions" :key="questionId">
-            {{ getQuestionById(questionId).question_description }}
-          </li>
-        </ul>
+        <div class="col col-lg-2 my-4">
+          <fieldset>
+            <legend>Selected Questions:</legend>
+            <ul>
+              <li v-for="questionId in selectedQuestions" :key="questionId">
+                {{ getQuestionById(questionId).question_description }}
+              </li>
+            </ul>
+            <button type="button" @click="clearSelectedQuestions">Clear</button>
+          </fieldset>
+        </div>
       </div>
 
       <button type="submit">Create Quiz</button>
@@ -49,6 +53,7 @@ export default {
     return {
       quizName: '',
       quizDescription: '',
+      selectedQuestion: [],
       selectedQuestions: [],
       availableQuestions: [],
       csrfToken: ''
@@ -79,6 +84,17 @@ export default {
     getQuestionById(questionId) {
       return this.availableQuestions.find(question => question.id === questionId);
     },
+    addSelectedQuestion() {
+      this.selectedQuestion.forEach(questionId => {
+        if (!this.selectedQuestions.includes(questionId)) {
+          this.selectedQuestions.push(questionId);
+        }
+      });
+      this.selectedQuestion = [];
+    },
+    clearSelectedQuestions() {
+      this.selectedQuestions = [];
+    },
     createQuiz() {
       const quizData = {
         quiz_name: this.quizName,
@@ -104,12 +120,19 @@ export default {
 
 <style scoped>
   .form-row {
-
-
+    display: flex;
+    flex-wrap: wrap;
   }
   .col {
     flex: 1;
     padding: 0 10px;
     max-width: 100%;
+  }
+  fieldset {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  legend {
+    font-weight: bold;
   }
 </style>
