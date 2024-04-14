@@ -1,7 +1,9 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from "vue-router";
 
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.js'
+import '@fortawesome/fontawesome-free/css/all.css'
 
 import App from './App.vue'
 import HomePage from "@/components/HomePage.vue";

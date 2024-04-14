@@ -36,10 +36,10 @@ connect_pg:
 	docker-compose exec postgres psql --username=radzek15 --dbname=quiz_db
 
 clear-cont:
-	docker container prune -f
+	docker rm -f $(docker ps -a -q)
 
 clear-vol:
-	docker volume prune -f
+	docker volume rm $(docker volume ls -q)
 
 clear-net:
 	docker network prune -f
