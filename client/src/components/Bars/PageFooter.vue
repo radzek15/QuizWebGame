@@ -26,18 +26,18 @@ export default {
       <div class="container text-center text-md-start mt-5">
         <div class="row mt-3">
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-            <h6 class="text-uppercase fw-bold mb-4 text-red">Games</h6>
+            <h6 class="text-uppercase fw-bold mb-4 text-red">Quizzes</h6>
             <ul>
-              <li><a href="/" class="text-reset">Game</a></li>
+              <li><router-link to="/demo-quiz" class="text-reset">Demo Quiz</router-link></li>
             </ul>
           </div>
 
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <h6 class="text-uppercase fw-bold mb-4 text-red">Useful links</h6>
             <ul>
-              <li><a href="/" class="text-reset">Home</a></li>
-              <li><a href="#" class="text-reset">Register</a></li>
-              <li><a href="#" class="text-reset">Help</a></li>
+              <li><router-link to="/" class="text-reset">Home</router-link></li>
+              <li><router-link to="#" class="text-reset">Register</router-link></li>
+              <li><router-link to="#" class="text-reset">Help</router-link></li>
             </ul>
           </div>
 
@@ -46,7 +46,7 @@ export default {
     </section>
 
     <div class='text-center p-3'>
-      <p class="text-light mt-3">Copyright: &copy; 2023 GamePedia. All rights reserved.</p>
+      <p class="mt-3">Copyright: &copy; 2024 QuizWebGame. All rights reserved.</p>
     </div>
   </footer>
 </template>
@@ -72,7 +72,7 @@ export default {
 
   li {
     margin-block: 10px;
-    color: white;
+    color: black;
   }
 
   li:hover {
