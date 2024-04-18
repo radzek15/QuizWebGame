@@ -57,3 +57,6 @@ pre-commit:
 
 diff:
 	pre-commit run --all-files --no-apply --diff
+
+key:
+	python -c "import secrets; print(secrets.token_urlsafe(38))"
