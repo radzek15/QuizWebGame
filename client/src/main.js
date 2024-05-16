@@ -9,6 +9,8 @@ import App from './App.vue'
 import HomePage from "@/components/HomePage.vue";
 import DemoQuiz from "@/components/Quiz/DemoQuiz.vue";
 import NewQuiz from "@/components/NewQuiz.vue";
+import RegisterPage from "@/components/auth/RegisterPage.vue";
+import LoginPage from "@/components/auth/LoginPage.vue";
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -16,6 +18,8 @@ const router = createRouter({
 		{ path: '/', component: HomePage},
 		{ path: '/demo-quiz', component: DemoQuiz},
 		{ path: '/create-quiz', component: NewQuiz},
+		{ path: '/register', component: RegisterPage},
+		{ path: '/login', component: LoginPage},
 	],
 });
 

@@ -1,4 +1,4 @@
-ARG IMAGE=node:bookworm-slim
+ARG IMAGE=node:21-bookworm-slim
 
 FROM ${IMAGE} as client-build
 

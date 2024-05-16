@@ -36,7 +36,7 @@ export default {
             <h6 class="text-uppercase fw-bold mb-4 text-red">Useful links</h6>
             <ul>
               <li><router-link to="/" class="text-reset">Home</router-link></li>
-              <li><router-link to="#" class="text-reset">Register</router-link></li>
+              <li><router-link to="/register" class="text-reset">Register</router-link></li>
               <li><router-link to="#" class="text-reset">Help</router-link></li>
             </ul>
           </div>
