@@ -31,12 +31,14 @@ export default {
           password: this.password
         });
         console.log(response.data);
-        // Redirect or handle successful login
       } catch (error) {
         console.error('Login error:', error.response.data);
-        // Handle login error
       }
     }
   }
 };
 </script>
+
+<style scoped>
+
+</style>

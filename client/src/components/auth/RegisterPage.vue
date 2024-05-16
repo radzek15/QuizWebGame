@@ -46,7 +46,6 @@ export default {
         });
 
         alert('Registration successful');
-        // Optionally, redirect to another page or perform other actions
       } catch (error) {
         console.error('Error during registration:', error.message);
         alert('Registration failed. Please try again later.');
@@ -57,5 +56,5 @@ export default {
 </script>
 
 <style scoped>
-/* Add custom component styles here if needed */
+
 </style>
