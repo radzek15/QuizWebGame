@@ -19,6 +19,7 @@ export default {
 <!--              <li><hr class="dropdown-divider"></li>-->
             </ul>
           </li>
+          <li><router-link to="/login" class="nav-item m-3">Sign In</router-link></li>
         </ul>
       </div>
     </div>
